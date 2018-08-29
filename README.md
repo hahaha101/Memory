@@ -1,2 +1,2 @@
-# Memory
-cocos creator game
+# hello-world
+Hello world new project template.
