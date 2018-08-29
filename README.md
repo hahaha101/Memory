@@ -1,0 +1,2 @@
+# Memory
+cocos creator game
