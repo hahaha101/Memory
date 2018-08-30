@@ -52,7 +52,7 @@ cc.Class({
                 this.isCombo = false;
             }
             this.counterTimer += (dt + dt*0.05*this.timerSpeed);
-            cc.log("timer speed:"+this.timerSpeed + "   counterTimer:" + this.counterTimer);
+            //cc.log("timer speed:"+this.timerSpeed + "   counterTimer:" + this.counterTimer);
             if (this.counterTimer >= this.turnDuration) {
                 this.isCounting = false;
                 this.callCounter.progress = 0;

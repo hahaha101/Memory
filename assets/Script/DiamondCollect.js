@@ -13,26 +13,50 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        diamond: cc.Sprite,
+        mine: cc.Sprite,
+        type: 0
+    },
+    init: function(type){
+        if(type == 0){
+            this.diamond.node.active = true;
+            this.mine.node.active = false;
+        }else{
+            this.diamond.node.active = false;
+            this.mine.node.active = true;
+        }
+        this.type = type;
+    },
+    getType: function(){
+        return this.type;
+    },
+    // LIFE-CYCLE CALLBACKS:
+    onSelect: function(){
+       // cc.log(this.getChildByName('diamond').name);
+        // TODO 没闹明白为什么这里this.type不能用了
+        if(this.getChildByName('diamond').active){
+            Game.instance.destroyDiamond(this,0);
+        }else{
+            Game.instance.destroyDiamond(this,1);
+        }
         
     },
 
-    // LIFE-CYCLE CALLBACKS:
-    onSelect: function(){
-        console.log("onSelect");
-        Game.instance.destroyDiamond(this);
-    },
-
     onLoad: function () {
+        this.type = 0;
         this.node.selected = false;
-        this.node.on(cc.Node.EventType.TOUCH_END, this.onSelect, this.node);
+        this.diamond.node.on(cc.Node.EventType.TOUCH_END, this.onSelect, this.node);
+        this.mine.node.on(cc.Node.EventType.TOUCH_END, this.onSelect, this.node);
     },
 
     unuse: function () {
-        this.node.off(cc.Node.EventType.TOUCH_END, this.onSelect, this.node);
+        this.diamond.node.off(cc.Node.EventType.TOUCH_END, this.onSelect, this.node);
+        this.mine.node.off(cc.Node.EventType.TOUCH_END, this.onSelect, this.node);
     },
 
     reuse: function () {
-        this.node.on(cc.Node.EventType.TOUCH_END, this.onSelect, this.node);
+        this.diamond.node.on(cc.Node.EventType.TOUCH_END, this.onSelect, this.node);
+        this.mine.node.on(cc.Node.EventType.TOUCH_END, this.onSelect, this.node);
     },
 
     start () {

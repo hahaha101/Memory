@@ -62,8 +62,14 @@ var Game = cc.Class({
         }else{
             diamond = cc.instantiate(this.diamondPrefab);
         }
+
+        let random = Math.random();
+        if(random > 0.0){
+            diamond.getComponent('DiamondCollect').init(1);
+        }
+        let isMine = diamond.getComponent('DiamondCollect').getType();
         //生成随机位置
-        var random = Math.random();
+        random = Math.random();
         var idx_x = random * 10;
         random = Math.random();
         var idx_y = random * 5;
@@ -74,11 +80,18 @@ var Game = cc.Class({
 
         this.diamondAnchor.addChild(diamond,2,tag);
     },
-    destroyDiamond:function(diamond){
+    destroyDiamond:function(diamond,type){
         //1.玩家点击了某一个钻石
+        let isMine = type;
         this.diamondPool.put(diamond);
-        this.diamond++;
-        this.inGameUI.labelDiamond.string = this.diamond;
+        if(isMine){
+            //点到雷了，失败
+            this.player.showFail();
+        }else{
+            this.diamond++;
+            this.inGameUI.labelDiamond.string = this.diamond;
+        }
+        
     },
     destroyRestDiamond:function(){
         //2.在一张图片的显示过程中，没有点击到的钻石，在切换下一张图片时需要回收

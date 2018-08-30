@@ -3745,8 +3745,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 60,
-      "height": 56
+      "width": 54,
+      "height": 51
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -3773,7 +3773,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "efa9cb98-f6a9-462d-a14f-4064fe30cfb0"
+      "__uuid__": "64576e58-2d77-4071-b429-c6596e9d0e01"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -3788,9 +3788,7 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": {
-      "__uuid__": "9f898efb-132b-462a-b727-52ec8f38d50f"
-    }
+    "_atlas": null
   },
   {
     "__type__": "cc.Sprite",
@@ -4036,16 +4034,16 @@
         "__uuid__": "109892a3-4286-406b-bfdb-8ca9611d248f"
       },
       {
-        "__uuid__": "5f9a9a5e-0c08-4c18-bdaa-0346c583760e"
+        "__uuid__": "13d11feb-d6a5-42ef-baf2-674af83e2bf3"
       },
       {
-        "__uuid__": "73bcd67b-2a60-412d-a5fe-72d298df4cfd"
+        "__uuid__": "bed8c86d-c29c-403b-812a-4a0331d9d706"
       },
       {
-        "__uuid__": "9558f35f-39dd-4f0d-9ee2-5e04e4568495"
+        "__uuid__": "9693ea11-cd0a-40b8-a21a-e22715bb6487"
       },
       {
-        "__uuid__": "abd9d126-5d58-44f9-90ab-35b58d51b02c"
+        "__uuid__": "c8ea7900-6fad-408c-a72b-892098d80299"
       }
     ],
     "mainPics": [],
@@ -4070,7 +4068,7 @@
       "__id__": 108
     },
     "diamondPrefab": {
-      "__uuid__": "d3bd829b-daa9-4b41-90f7-979d5c0dffbd"
+      "__uuid__": "e17d3bab-bc36-4608-aacf-735d44c82a15"
     },
     "inGameUI": {
       "__id__": 20
