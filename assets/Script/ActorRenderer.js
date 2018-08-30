@@ -17,6 +17,22 @@ cc.Class({
 
     onLoad: function () {
         this.callCounter = Game.instance.inGameUI.betCounter;
+        this.cardPool = new cc.NodePool();
+        let initCount = 2;
+        for(let i = 0;i < initCount;++i){
+            let card = cc.instantiate(this.cardPrefab);
+            this.cardPool.put(card);
+        }
+    },
+
+    createCard: function () {
+        let card = null;
+        if (this.cardPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+            card = this.cardPool.get();
+        } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+            card = cc.instantiate(this.cardPrefab);
+        }
+        return card;
     },
 
     init: function ( turnDuration ) {
@@ -83,7 +99,9 @@ cc.Class({
         this.timerSpeed = 0;
     },
     showNormal:function(){
-        this.anchorCards.removeChildByTag(1001);
+        var node = this.anchorCards.getChildByTag(1001);
+        this.cardPool.put(node);
+        //this.anchorCards.removeChildByTag(1001);
         this.anchorCards.active = true;
 
     },
@@ -109,7 +127,7 @@ cc.Class({
         }
         var node = this.anchorCards.getChildByTag(1001);
         var moveOutAction = cc.moveTo(0.3,cc.v2(1500,0));
-        var callback = cc.callFunc(this._onDealOnceEnd, this);
+        var callback = cc.callFunc(this._onDealOnceEnd, this,node);
         node.runAction(cc.sequence(moveOutAction,callback));
     },
     comboEnd: function(){
@@ -118,46 +136,45 @@ cc.Class({
     },
 
     onDeal: function (type,card, show) {
-        var newCard = cc.instantiate(this.cardPrefab).getComponent('Card');
-        this.anchorCards.addChild(newCard.node,1,1001);
+        var cardNode = this.createCard();
+        var newCard = cardNode.getComponent('Card');
+        cardNode.scale = 0.1;
+        this.anchorCards.addChild(cardNode,1,1001);
         newCard.init(type,card);
-        newCard.reveal(show);
 
         var startPos = cc.v2(-330, 200);
         var endPos = cc.v2(0, 0);
-        newCard.node.setPosition(startPos);
+        cardNode.setPosition(startPos);
         
         this.isCombo = true;
-        //this._updatePointPos(endPos.x);
 
         var scaleAction = cc.scaleBy(0.5,10,10);
         var moveAction = cc.moveTo(0.5, endPos);
         var callback = cc.callFunc(this._onDealEnd, this);
-        newCard.node.runAction(cc.sequence(cc.spawn(scaleAction,moveAction),callback));
+        cardNode.runAction(cc.sequence(cc.spawn(scaleAction,moveAction),callback));
     },
 
     onDealOnce: function (type,card, show) {
-        var newCard = cc.instantiate(this.cardPrefab).getComponent('Card');
-        this.anchorCards.addChild(newCard.node,1,1001);
+        var cardNode = this.createCard();
+        var newCard = cardNode.getComponent('Card');
+        this.anchorCards.addChild(cardNode,1,1001);
         newCard.init(type,card);
-        newCard.reveal(show);
 
         var startPos = cc.v2(-330, 200);
         var endPos = cc.v2(0, 0);
-        newCard.node.setPosition(startPos);
-        
-        //this._updatePointPos(endPos.x);
+        cardNode.setPosition(startPos);
 
         var scaleAction = cc.scaleBy(0.5,10,10);
         var moveAction = cc.moveTo(0.5, endPos);
         var delayShow = cc.delayTime(0.5);
         var moveOutAction = cc.moveTo(0.5,cc.v2(1500,0));
-        var callback = cc.callFunc(this._onDealOnceEnd, this);
+        var callback = cc.callFunc(this._onDealOnceEnd, this,cardNode);
 
         newCard.node.runAction(cc.sequence(cc.spawn(scaleAction,moveAction),delayShow,moveOutAction,callback));
     },
-    _onDealOnceEnd: function(target) {
-        this.anchorCards.removeChildByTag(1001);
+    _onDealOnceEnd: function(target,node) {
+        //this.anchorCards.removeChildByTag(1001);
+        this.cardPool.put(node);
         Game.instance.inGameUI.flagDark.active = false;
         Game.instance.inGameUI.flagLight.active = true;
         Game.instance.showCard();
