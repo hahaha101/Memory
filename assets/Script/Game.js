@@ -108,9 +108,13 @@ var Game = cc.Class({
         anchor.addChild(playerNode);
         playerNode.position = cc.v2(0, 0);
 
+        /*
         var playerInfoPos = cc.find('anchorPlayerInfo',anchor).getPosition();
         var actorRenderer = playerNode.getComponent('ActorRenderer');
         actorRenderer.init(players[0],playerInfoPos,this.betDuration);
+        */
+       var actorRenderer = playerNode.getComponent('ActorRenderer');
+       actorRenderer.init(this.betDuration);
 
         this.player = playerNode.getComponent('Player');
         this.player.init();

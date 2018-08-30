@@ -7,10 +7,8 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        playerInfo: cc.Node,
         cardPrefab: cc.Prefab,
         anchorCards: cc.Node,
-        spPlayerPhoto: cc.Sprite,
         cardSpace: 0,
         isCombo:true,
         timerSpeed:0,
@@ -21,7 +19,7 @@ cc.Class({
         this.callCounter = Game.instance.inGameUI.betCounter;
     },
 
-    init: function ( playerInfo, playerInfoPos,turnDuration ) {
+    init: function ( turnDuration ) {
         // actor
         this.actor = this.getComponent('Actor');
 
@@ -32,11 +30,12 @@ cc.Class({
         this.timerSpeed = 0;
         
         // nodes
+        /*
         this.playerInfo.position = playerInfoPos;
         var photoIdx = playerInfo.photoIdx % 5;
         this.spPlayerPhoto.spriteFrame = Game.instance.assetMng.playerPhotos[photoIdx];
         // fx
-        /*
+        
         this.animFX = this.animFX.getComponent('FXPlayer');
         this.animFX.init();
         this.animFX.show(false);
