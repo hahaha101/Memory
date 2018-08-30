@@ -32,6 +32,7 @@ cc.Class({
         } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
             card = cc.instantiate(this.cardPrefab);
         }
+        card.scale = 0.1;
         return card;
     },
 
@@ -138,7 +139,6 @@ cc.Class({
     onDeal: function (type,card, show) {
         var cardNode = this.createCard();
         var newCard = cardNode.getComponent('Card');
-        cardNode.scale = 0.1;
         this.anchorCards.addChild(cardNode,1,1001);
         newCard.init(type,card);
 

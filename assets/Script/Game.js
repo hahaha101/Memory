@@ -64,7 +64,7 @@ var Game = cc.Class({
         }
 
         let random = Math.random();
-        if(random > 0.0){
+        if(random > 0.9){
             diamond.getComponent('DiamondCollect').init(1);
         }
         let isMine = diamond.getComponent('DiamondCollect').getType();
