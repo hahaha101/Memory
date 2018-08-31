@@ -91,10 +91,10 @@ var Game = cc.Class({
             sProp = cc.instantiate(this.smallPropPrefab);
         }
         let random = Math.random();
-        let propType = (random * 3) | 0;
+        let propType = (random * 4) | 0;
         sProp.getComponent('SmallProp').init(propType);
         sProp = this.setNodePosWithRandom(sProp);
-        this.diamondAnchor.addChild(sProp,3000);
+        this.diamondAnchor.addChild(sProp,2,3000);
     },
     destroySProp:function(sProp,propType){
         this.smallPropPool.put(sProp);
@@ -151,7 +151,13 @@ var Game = cc.Class({
             prop = cc.instantiate(this.propPrefab);
         }
         prop.getComponent('Prop').init(propType);
-        this.propAnchor.addChild(prop);
+        this.propAnchor.addChild(prop,2,4000);
+    },
+    destroyProp:function(){
+        let prop = this.propAnchor.getChildByTag(4000);
+        if(prop != null){
+            this.propPool.put(prop);
+        }
     },
     createPlayer:function(){
         var playerNode = cc.instantiate(this.playerPrefab);

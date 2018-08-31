@@ -94,8 +94,9 @@ cc.Class({
 
     showFail: function(score,diamond,isHighScore){
         this.resetCountdown();
+        Game.instance.destroyRestSProp();
         Game.instance.destroyRestDiamond();
-        Game.instance.destroyRestDiamond();
+        Game.instance.destroyProp();
         Game.instance.inGameUI.showFailPanel(score,diamond,isHighScore);
         this.anchorCards.active = false;
         this.timerSpeed = 0;

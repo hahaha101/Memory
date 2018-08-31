@@ -39,7 +39,7 @@ Decks.prototype.draw = function (lastCard) {
             index = index%this._numberOfDecks;
         }
     }
-    cc.log(index);
+    //cc.log(index);
     return index;
 };
 

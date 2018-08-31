@@ -18,7 +18,7 @@ cc.Class({
     },
 
     init: function(type){
-        this.mainPic.SpriteFrame = Game.instance.assetMng.propPhotos[type];
+        this.mainPic.spriteFrame = Game.instance.assetMng.propPhotos[type];
     },
     // LIFE-CYCLE CALLBACKS:
 
