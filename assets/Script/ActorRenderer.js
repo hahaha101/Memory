@@ -72,7 +72,7 @@ cc.Class({
             if (this.counterTimer >= this.turnDuration) {
                 this.isCounting = false;
                 this.callCounter.progress = 0;
-                this.showFail();
+                Game.instance.showFail();
             }
         }
     },
@@ -92,10 +92,10 @@ cc.Class({
         }
     },
 
-    showFail: function(){
+    showFail: function(score,diamond,isHighScore){
         this.resetCountdown();
         Game.instance.destroyRestDiamond();
-        Game.instance.inGameUI.showFailPanel();
+        Game.instance.inGameUI.showFailPanel(score,diamond,isHighScore);
         this.anchorCards.active = false;
         this.timerSpeed = 0;
     },

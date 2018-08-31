@@ -46,8 +46,8 @@ cc.Class({
         this.renderer.oldCardFly();
     },
 
-    showFail: function(){
-        this.renderer.showFail();
+    showFail: function(score,diamond,isHighScore){
+        this.renderer.showFail(score,diamond,isHighScore);
     },
     showNormal: function(){
         this.renderer.showNormal();

@@ -22,7 +22,10 @@ cc.Class({
         labelCombo: {
             default: null,
             type: cc.Label
-        }
+        },
+        failPanelLabelScore: cc.Label,
+        failPanelLabelDiamond: cc.Label,
+        failPanelHighScore: cc.Sprite
     },
 
     // use this for initialization
@@ -32,8 +35,11 @@ cc.Class({
         this.isBetCounting = false;
         this.failBtnPanel.active = false;
     },
-    showFailPanel: function(){
+    showFailPanel: function(score,diamond,isHighScore){
         this.failBtnPanel.active = true;
+        this.failPanelLabelScore.string = score;
+        this.failPanelLabelDiamond.string = diamond;
+        this.failPanelHighScore.node.active = isHighScore;
         this.btnYes.active = false;
         this.btnNo.active = false;
         this.flagDark.active = true;

@@ -75,7 +75,7 @@ var Game = cc.Class({
         var idx_y = random * 5;
         let x = this.diamondAnchor.width/10 * idx_x;
         let y = this.diamondAnchor.height/5 * idx_y;
-        cc.log("diamond pos:" + idx_x + "-" + idx_y);
+        //cc.log("diamond pos:" + idx_x + "-" + idx_y);
         diamond.position = cc.v2(x,y);
 
         this.diamondAnchor.addChild(diamond,2,tag);
@@ -86,7 +86,7 @@ var Game = cc.Class({
         this.diamondPool.put(diamond);
         if(isMine){
             //点到雷了，失败
-            this.player.showFail();
+            this.showFail();
         }else{
             this.diamond++;
             this.inGameUI.labelDiamond.string = this.diamond;
@@ -149,9 +149,24 @@ var Game = cc.Class({
             var comboCount = this.player.renderer.comboCount;
             this.score += (1+comboCount);
             this.inGameUI.labelScore.string = this.score;
-        }else{                      
-            this.player.showFail();
+        }else{                     
+            //游戏结束，显示分数和钻石，如果超过了最高分，则显示最高分 
+            this.showFail();
         }
+    },
+
+    showFail: function(){
+        //比较当前得分和最高分
+        let isHighScore = false;
+        let highScore = cc.sys.localStorage.getItem('highScore0');
+        if(highScore == null){
+            isHighScore = true;
+        }else{
+            if(this.score > highScore){
+                isHighScore = true;
+            }
+        }
+        this.player.showFail(this.score,this.diamond,isHighScore);
     },
 
     restart: function(){
