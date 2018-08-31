@@ -10,6 +10,9 @@ var Game = cc.Class({
         playerPrefab: cc.Prefab,
         diamondAnchor: cc.Node,
         diamondPrefab: cc.Prefab,
+        propAnchor: cc.Node,
+        propPrefab: cc.Prefab,
+        smallPropPrefab: cc.Prefab,
         inGameUI: cc.Node,
         audioMng: cc.Node,
         assetMng: cc.Node,
@@ -45,6 +48,20 @@ var Game = cc.Class({
             this.diamondPool.put(diamond);
         }
 
+        this.propPool = new cc.NodePool('Prop');
+        let propCount = 2;
+        for(let i = 0;i < propCount;++i){
+            let prop = cc.instantiate(this.propPrefab);
+            this.propPool.put(prop);
+        }
+
+        this.smallPropPool = new cc.NodePool('smallProp');
+        propCount = 2;
+        for(let i = 0;i < propCount;++i){
+            let smallProp = cc.instantiate(this.smallPropPrefab);
+            this.smallPropPool.put(smallProp);
+        }
+
         this.set = Types.picSet;
         this.decks = new Decks(this.numberOfDecks);
 
@@ -54,7 +71,41 @@ var Game = cc.Class({
 
         this.audioMng.playMusic();
     },
-
+    setNodePosWithRandom: function(node){
+        //生成随机位置
+        var random = Math.random();
+        var idx_x = random * 10;
+        random = Math.random();
+        var idx_y = random * 5;
+        let x = this.diamondAnchor.width/10 * idx_x;
+        let y = this.diamondAnchor.height/5 * idx_y;
+        //cc.log("diamond pos:" + idx_x + "-" + idx_y);
+        node.position = cc.v2(x,y);
+        return node;
+    },
+    createSmallProp: function(){
+        let sProp = null;
+        if(this.smallPropPool.size() > 0){
+            sProp = this.smallPropPool.get();
+        }else{
+            sProp = cc.instantiate(this.smallPropPrefab);
+        }
+        let random = Math.random();
+        let propType = (random * 3) | 0;
+        sProp.getComponent('SmallProp').init(propType);
+        sProp = this.setNodePosWithRandom(sProp);
+        this.diamondAnchor.addChild(sProp,3000);
+    },
+    destroySProp:function(sProp,propType){
+        this.smallPropPool.put(sProp);
+        this.createProp(propType);
+    },
+    destroyRestSProp:function(){
+        let sProp = this.diamondAnchor.getChildByTag(3000);
+        if(sProp != null){
+            this.smallPropPool.put(sProp);
+        }
+    },
     createDiamond:function(tag){
         let diamond = null;
         if(this.diamondPool.size() > 0){
@@ -67,17 +118,7 @@ var Game = cc.Class({
         if(random > 0.9){
             diamond.getComponent('DiamondCollect').init(1);
         }
-        let isMine = diamond.getComponent('DiamondCollect').getType();
-        //生成随机位置
-        random = Math.random();
-        var idx_x = random * 10;
-        random = Math.random();
-        var idx_y = random * 5;
-        let x = this.diamondAnchor.width/10 * idx_x;
-        let y = this.diamondAnchor.height/5 * idx_y;
-        //cc.log("diamond pos:" + idx_x + "-" + idx_y);
-        diamond.position = cc.v2(x,y);
-
+        diamond = this.setNodePosWithRandom(diamond);
         this.diamondAnchor.addChild(diamond,2,tag);
     },
     destroyDiamond:function(diamond,type){
@@ -101,6 +142,16 @@ var Game = cc.Class({
                this.diamondPool.put(diamond);
            }
         }
+    },
+    createProp:function(propType){
+        let prop = null;
+        if(this.propPool.size() > 0){
+            prop = this.propPool.get();
+        }else{
+            prop = cc.instantiate(this.propPrefab);
+        }
+        prop.getComponent('Prop').init(propType);
+        this.propAnchor.addChild(prop);
     },
     createPlayer:function(){
         var playerNode = cc.instantiate(this.playerPrefab);
@@ -133,6 +184,12 @@ var Game = cc.Class({
         for(let i = 0;i < diamondCount;++i){
             this.createDiamond(2000+i);
         }
+
+        random = Math.random();
+        if(random > 0){
+            this.createSmallProp();
+        }
+
         this.player.addCard(this.set,this.decks.draw(this.player.lastCard));
     },
 
@@ -145,6 +202,7 @@ var Game = cc.Class({
         if(customEventData == this.player.isSame){  //正确，显示下一张图片
             //this.showCard();
             this.destroyRestDiamond();
+            this.destroyRestSProp();
             this.player.oldCardFly();
             var comboCount = this.player.renderer.comboCount;
             this.score += (1+comboCount);

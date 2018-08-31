@@ -47,17 +47,6 @@ cc.Class({
             cc.sys.localStorage.setItem('highScore0',Types.highScore0);
         }
 
-        Types.highScore1 = cc.sys.localStorage.getItem('highScore1');
-        if(Types.highScore1 == null){
-            Types.highScore1 = 0;
-            cc.sys.localStorage.setItem('highScore1',Types.highScore1);
-        }
-        Types.highScore2 = cc.sys.localStorage.getItem('highScore2');
-        if(Types.highScore2 == null){
-            Types.highScore2 = 0;
-            cc.sys.localStorage.setItem('highScore2',Types.highScore2);
-        }
-
         var picStatus = cc.sys.localStorage.getItem('picStatus');
         if(picStatus == null){
             Types.picStatus.push(1);

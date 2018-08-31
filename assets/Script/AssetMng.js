@@ -2,7 +2,7 @@ var AssetMng = cc.Class({
     extends: cc.Component,
 
     properties: {
-        playerPhotos: [cc.SpriteFrame],
+        propPhotos: [cc.SpriteFrame],
         fruitPhotos: [cc.SpriteFrame],
         vegetables: [cc.SpriteFrame],
         mainPics: [cc.SpriteFrame],
