@@ -20,6 +20,7 @@ var Game = cc.Class({
         score: 0,
         diamond: 0,
         set:0,
+        curPropType:-1,
         numberOfDecks: {
             default: 1,
             type: 'Integer'
@@ -63,6 +64,7 @@ var Game = cc.Class({
         }
 
         this.set = Types.picSet;
+        this.curPropType = -1;
         this.decks = new Decks(this.numberOfDecks);
 
         this.scheduleOnce(function(){
@@ -92,6 +94,7 @@ var Game = cc.Class({
         }
         let random = Math.random();
         let propType = (random * 4) | 0;
+        this.curPropType = propType;
         sProp.getComponent('SmallProp').init(propType);
         sProp = this.setNodePosWithRandom(sProp);
         this.diamondAnchor.addChild(sProp,2,3000);
@@ -127,7 +130,9 @@ var Game = cc.Class({
         this.diamondPool.put(diamond);
         if(isMine){
             //点到雷了，失败
-            this.showFail();
+            if(this.curPropType != 3){
+                this.showFail();
+            }
         }else{
             this.diamond++;
             this.inGameUI.labelDiamond.string = this.diamond;
@@ -205,13 +210,18 @@ var Game = cc.Class({
         this.inGameUI.btnYes.active = false;
         this.inGameUI.btnNo.active = false;
 
-        if(customEventData == this.player.isSame){  //正确，显示下一张图片
+        if(customEventData == this.player.isSame || this.curPropType == 1){  //正确，显示下一张图片
             //this.showCard();
             this.destroyRestDiamond();
             this.destroyRestSProp();
             this.player.oldCardFly();
             var comboCount = this.player.renderer.comboCount;
-            this.score += (1+comboCount);
+            if(this.curPropType == 0){
+                this.score += (2+comboCount);
+            }else{
+                this.score += (1+comboCount);
+            }
+            
             this.inGameUI.labelScore.string = this.score;
         }else{                     
             //游戏结束，显示分数和钻石，如果超过了最高分，则显示最高分 

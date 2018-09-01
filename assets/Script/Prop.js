@@ -19,6 +19,21 @@ cc.Class({
 
     init: function(type){
         this.mainPic.spriteFrame = Game.instance.assetMng.propPhotos[type];
+        this.counterTimer = 0;
+        this.isPropCounting = true;
+        this.turnDuration = 5;
+    },
+
+    update: function (dt) {
+        //cc.log(dt);
+        if(this.isPropCounting){
+            this.propCounter.progress = 1 - this.counterTimer/this.turnDuration;
+        }
+        this.counterTimer += dt;
+        if (this.counterTimer >= this.turnDuration) {
+            this.isPropCounting = false;
+            this.propCounter.progress = 0;
+        }
     },
     // LIFE-CYCLE CALLBACKS:
 
