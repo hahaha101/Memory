@@ -94,12 +94,13 @@ var Game = cc.Class({
         }
         let random = Math.random();
         let propType = (random * 4) | 0;
-        this.curPropType = propType;
+        propType = 2;
         sProp.getComponent('SmallProp').init(propType);
         sProp = this.setNodePosWithRandom(sProp);
         this.diamondAnchor.addChild(sProp,2,3000);
     },
     destroySProp:function(sProp,propType){
+        this.curPropType = propType;
         this.smallPropPool.put(sProp);
         this.createProp(propType);
     },
@@ -147,6 +148,32 @@ var Game = cc.Class({
                this.diamondPool.put(diamond);
            }
         }
+    },
+    autoGetDiamond: function(){
+
+        var vec2;
+        let prop = this.propAnchor.getChildByTag(4000);
+        if(prop != null){
+            var pos = prop.getPosition();
+            vec2 = this.propAnchor.convertToWorldSpace(pos);
+            vec2 = vec2.sub(cc.v2(prop.width * 1.5,prop.height*1.5));
+        }
+
+        for(let i = 0;i < 5;++i){
+            let diamond = this.diamondAnchor.getChildByTag(2000+i);
+            if(diamond != null){
+                if(diamond.getChildByName('diamond').active){
+                    this.diamond++;
+                    var moveAction = cc.moveTo(0.2,vec2);
+                    var callback = cc.callFunc(this._autoGetDiamondEnd, this,diamond);
+                    diamond.runAction(cc.sequence(moveAction,callback));
+                }
+            }
+         }
+    },
+    _autoGetDiamondEnd: function(node){
+        this.inGameUI.labelDiamond.string = this.diamond;
+        this.diamondPool.put(node);
     },
     createProp:function(propType){
         let prop = null;

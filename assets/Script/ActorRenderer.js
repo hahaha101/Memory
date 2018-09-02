@@ -187,6 +187,11 @@ cc.Class({
         this.startCountdown();
         Game.instance.inGameUI.btnYes.active = true;
         Game.instance.inGameUI.btnNo.active = true;
+        if(Game.instance.curPropType == 2){
+            //cc.log("钻石快到碗里来");
+            Game.instance.autoGetDiamond();
+
+        }
     },
 
     onReset: function () {
