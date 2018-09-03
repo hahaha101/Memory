@@ -17,11 +17,11 @@ cc.Class({
         propCounter: cc.ProgressBar
     },
 
-    init: function(type){
+    init: function(type,duration){
         this.mainPic.spriteFrame = Game.instance.assetMng.propPhotos[type];
         this.counterTimer = 0;
         this.isPropCounting = true;
-        this.turnDuration = 5;
+        this.turnDuration = duration;
     },
 
     update: function (dt) {
@@ -33,6 +33,7 @@ cc.Class({
         if (this.counterTimer >= this.turnDuration) {
             this.isPropCounting = false;
             this.propCounter.progress = 0;
+            Game.instance.destroyProp();
         }
     },
     // LIFE-CYCLE CALLBACKS:

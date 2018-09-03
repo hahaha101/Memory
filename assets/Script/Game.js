@@ -94,7 +94,6 @@ var Game = cc.Class({
         }
         let random = Math.random();
         let propType = (random * 4) | 0;
-        propType = 2;
         sProp.getComponent('SmallProp').init(propType);
         sProp = this.setNodePosWithRandom(sProp);
         this.diamondAnchor.addChild(sProp,2,3000);
@@ -182,7 +181,7 @@ var Game = cc.Class({
         }else{
             prop = cc.instantiate(this.propPrefab);
         }
-        prop.getComponent('Prop').init(propType);
+        prop.getComponent('Prop').init(propType,this.betDuration*3);
         this.propAnchor.addChild(prop,2,4000);
     },
     destroyProp:function(){
@@ -190,6 +189,7 @@ var Game = cc.Class({
         if(prop != null){
             this.propPool.put(prop);
         }
+        this.curPropType = -1;
     },
     createPlayer:function(){
         var playerNode = cc.instantiate(this.playerPrefab);
@@ -223,9 +223,11 @@ var Game = cc.Class({
             this.createDiamond(2000+i);
         }
 
-        random = Math.random();
-        if(random > 0){
-            this.createSmallProp();
+        if(this.curPropType == -1){
+            random = Math.random();
+            if(random > 0.9){
+                this.createSmallProp();
+            }
         }
 
         this.player.addCard(this.set,this.decks.draw(this.player.lastCard));
@@ -267,6 +269,7 @@ var Game = cc.Class({
                 isHighScore = true;
             }
         }
+        this.curPropType = -1;
         this.player.showFail(this.score,this.diamond,isHighScore);
     },
 
