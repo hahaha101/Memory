@@ -2660,7 +2660,7 @@
         "__uuid__": "b40057d0-ab8b-45af-b6c3-fae10fd90b23"
       },
       {
-        "__uuid__": "26f50cdd-00e6-4959-a825-f9d96c9db364"
+        "__uuid__": "b6a53bf7-cc7f-4029-808b-9b86d6474ae7"
       }
     ],
     "picPrices": [
@@ -3058,8 +3058,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 162,
-      "height": 204
+      "width": 324,
+      "height": 423
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -3068,7 +3068,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 0
+      "y": -30
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -3089,7 +3089,7 @@
       "__uuid__": "e49cf173-3bfa-40cb-8a57-0d82e3d606c2"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
