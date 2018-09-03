@@ -214,8 +214,6 @@ var Game = cc.Class({
     },
 
     showCard: function(){
-        //this.inGameUI.btnYes.active = true;
-        //this.inGameUI.btnNo.active = true;
         //随机个数，最多五个
         var random = Math.random();
         let diamondCount = (random * 5) | 0;
@@ -261,14 +259,17 @@ var Game = cc.Class({
     showFail: function(){
         //比较当前得分和最高分
         let isHighScore = false;
-        let highScore = cc.sys.localStorage.getItem('highScore0');
-        if(highScore == null){
+        let highScore = Number(cc.sys.localStorage.getItem('highScore0'));
+        if(this.score > highScore){
             isHighScore = true;
-        }else{
-            if(this.score > highScore){
-                isHighScore = true;
-            }
+            cc.sys.localStorage.setItem('highScore0',this.score);
         }
+        
+        let sDiamondTotal = cc.sys.localStorage.getItem('diamondCount');
+        let diamondTotal = Number(sDiamondTotal);
+        diamondTotal += this.diamond;
+        cc.sys.localStorage.setItem('diamondCount',diamondTotal);
+        
         this.curPropType = -1;
         this.player.showFail(this.score,this.diamond,isHighScore);
     },
