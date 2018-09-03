@@ -196,7 +196,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "d9e05df3-bb27-42c9-8535-36334d1e8810"
+      "__uuid__": "6f76af94-4ebe-4e99-974e-4b40a756b8f6"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -211,7 +211,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "8aa9939b-deb5-4c29-8631-981db63fb41e"
+    }
   },
   {
     "__type__": "3bea6ky6dZB3KrxbuNIKgXk",
@@ -227,9 +229,7 @@
     "cardBG": {
       "__id__": 6
     },
-    "texFrontBG": {
-      "__uuid__": "d9e05df3-bb27-42c9-8535-36334d1e8810"
-    },
+    "texFrontBG": null,
     "texBackBG": {
       "__uuid__": "36864da2-7a92-4c07-a865-b1209f3a4f1a"
     }
