@@ -269,15 +269,16 @@ var Game = cc.Class({
         let diamondTotal = Number(sDiamondTotal);
         diamondTotal += this.diamond;
         cc.sys.localStorage.setItem('diamondCount',diamondTotal);
-        
         this.curPropType = -1;
         this.player.showFail(this.score,this.diamond,isHighScore);
     },
 
     restart: function(){
         this.score = 0;
+        this.diamond = 0;
         this.player.renderer.comboCount = 0;
         this.inGameUI.labelScore.string = this.score;
+        this.inGameUI.labelDiamond.string = this.diamond;
         this.inGameUI.failBtnPanel.active = false;
         this.inGameUI.btnYes.active = false;
         this.inGameUI.btnNo.active = false;

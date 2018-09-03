@@ -54,7 +54,7 @@
     "_rotationX": 0,
     "_rotationY": 0,
     "_scaleX": 1,
-    "_scaleY": 0.5,
+    "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -163,7 +163,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "5c923f17-1c2f-4a6c-92b8-467082e82e28"
+      "__uuid__": "80468354-805c-491a-910a-d6aa643b3fcd"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -179,7 +179,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_atlas": {
-      "__uuid__": "89c003d4-4e01-488e-aa4b-a9b0cf6e3000"
+      "__uuid__": "8aa9939b-deb5-4c29-8631-981db63fb41e"
     }
   },
   {
