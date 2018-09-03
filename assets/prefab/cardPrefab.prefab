@@ -105,8 +105,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 324,
-      "height": 423
+      "width": 292,
+      "height": 381
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -230,9 +230,7 @@
       "__id__": 6
     },
     "texFrontBG": null,
-    "texBackBG": {
-      "__uuid__": "36864da2-7a92-4c07-a865-b1209f3a4f1a"
-    }
+    "texBackBG": null
   },
   {
     "__type__": "cc.PrefabInfo",
