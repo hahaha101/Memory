@@ -35,11 +35,12 @@ cc.Class({
     },
 
     initFromLocalStorage: function(){
-        this.curIdx = 0;
         Types.picSet = cc.sys.localStorage.getItem('picSet');
         if(Types.picSet == null){
             Types.picSet = this.curIdx;
             cc.sys.localStorage.setItem('picSet',Types.picSet);
+        }else{
+            this.curIdx = Types.picSet;
         }
         
         Types.diamondCount = cc.sys.localStorage.getItem('diamondCount');
@@ -75,6 +76,7 @@ cc.Class({
         
         //cc.sys.localStorage.removeItem('diamondCount');
         //cc.sys.localStorage.removeItem('picStatus');
+        this.curIdx = 0;
         this.initFromLocalStorage();
         this.refreshPicStatus();
         cc.director.preloadScene('game', function () {
@@ -100,8 +102,8 @@ cc.Class({
                 this.curIdx--;
             }
         }
-        this.refreshPicStatus();
         Types.picSet = this.curIdx;
+        this.refreshPicStatus();
     },
     refreshPicStatus: function(){
         this.diamondLabel.string = Types.diamondCount;
