@@ -6,6 +6,7 @@ cc.Class({
     properties: {
         audioMng: cc.Node,
         assetMng: cc.Node,
+        blockNode: cc.Node,
         btnShop: cc.Button,
         mainPic: cc.Sprite,
         resizeDialog: cc.Prefab,
@@ -24,8 +25,12 @@ cc.Class({
         return nMask;
     },
     arrayFromMask: function(nMask){
-        for (var nShifted = nMask, aFromMask = []; nShifted; 
-            aFromMask.push(Boolean(nShifted & 1)), nShifted >>>= 1);
+        var aFromMask = [];
+        let loopCount = this.assetMng.mainPics.length;
+        for (var nShifted = nMask; loopCount > 0; nShifted >>>= 1){
+            aFromMask.push(Boolean(nShifted & 1));
+            --loopCount;
+        }
         return aFromMask;
     },
 
@@ -38,7 +43,6 @@ cc.Class({
         }
         
         Types.diamondCount = cc.sys.localStorage.getItem('diamondCount');
-        Types.diamondCount = 20000;
         if(Types.diamondCount == null){
             Types.diamondCount = 0;
             cc.sys.localStorage.setItem('diamondCount',Types.diamondCount);
@@ -70,6 +74,7 @@ cc.Class({
         this.assetMng = this.assetMng.getComponent('AssetMng');
         
         //cc.sys.localStorage.removeItem('diamondCount');
+        //cc.sys.localStorage.removeItem('picStatus');
         this.initFromLocalStorage();
         this.refreshPicStatus();
         cc.director.preloadScene('game', function () {
@@ -78,7 +83,6 @@ cc.Class({
     },
 
     playGame: function (mode,customEventData) {
-        cc.log(customEventData);
         cc.sys.localStorage.setItem('picSet',Types.picSet);
         cc.director.loadScene('game');
     },
@@ -105,7 +109,7 @@ cc.Class({
         this.mainPic.spriteFrame = this.assetMng.mainPics[this.curIdx];
         this.picTitle.string = this.assetMng.picTitles[this.curIdx];
         this.picPrice.string = this.assetMng.picPrices[this.curIdx];
-        if(Types.picStatus[this.curIdx] == 0){
+        if(Types.picStatus[this.curIdx] == 1){
             this.btnShop.node.active = false;
         }else{
             this.btnShop.node.active = true;
@@ -130,27 +134,32 @@ cc.Class({
         Types.picStatus[Types.picSet] = 1;
         var mask = this.createMask();
         cc.sys.localStorage.setItem('picStatus',mask);
+
+        this.blockNode.active = false;
         //TODO-图片系列改为未锁定状态
+        this.btnShop.node.active = false;
     },
 
     dialogBtn2: function(event, customEventData){
         var self = event.currentTarget;
         var dialog = self.parent.parent;
         dialog.getComponent("dialog").close();
+        this.blockNode.active = false;
     },
 
     showConfirm: function(){
-        var dialog = cc.instantiate(this.resizeDialog).getComponent("dialog").init("","确认解锁当前图片吗");
+        var dialog = cc.instantiate(this.resizeDialog).getComponent("dialog").init("","确认解锁当前图片吗",this.blockNode);
         var btn1Handler = CREATE_EVENT_HANDLER(this.node, "Menu", "dialogBtn1", "1");
         var btn2Handler = CREATE_EVENT_HANDLER(this.node, "Menu", "dialogBtn2", "2");
         dialog.addButton("确认", btn1Handler).addButton("取消", btn2Handler);
         cc.find("Canvas").addChild(dialog.node);
+        this.blockNode.active = true;
     },
     buyPic: function(){
 
         //1.查看购买状态
         let status = Types.picStatus[this.curIdx];
-        if(status == 0){
+        if(status == 1){
             return;
         }
 
@@ -159,8 +168,6 @@ cc.Class({
         //3.钻石数量充足，确认是否购买
         if(price <= Types.diamondCount){
             this.showConfirm();
-        }else{
-
         }
         
     },

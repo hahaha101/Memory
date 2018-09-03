@@ -15,7 +15,7 @@ cc.Class({
     },
 
     //初始化方法，两个可选的字符串参数
-    init: function(title, content){
+    init: function(title, content,node){
         this.node.on("touchstart", function(event, touch){
             event.stopPropagation();
         });
@@ -41,6 +41,7 @@ cc.Class({
             node.getComponent(cc.Label).string = content;
             this.content.addChild(node);
         }
+        this.blockNode = node;
         return this;
     },
     //设置对话框标题，没有参数默认标题为“提示”
@@ -120,6 +121,11 @@ cc.Class({
 
     //关闭对话框
     close: function(event, customEventData){
+        var node = cc.find("Canvas/bgDisable");
+        if(node != null){
+            node.active = false;
+        }
+        //cc.find("bgDisable").active = false;
         this.node.destroy();
     },
     //隐藏对话框
