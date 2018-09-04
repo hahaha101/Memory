@@ -2010,29 +2010,59 @@
     "seaPhotos": [],
     "mainPics": [
       {
-        "__uuid__": "e49cf173-3bfa-40cb-8a57-0d82e3d606c2"
+        "__uuid__": "05936752-51ce-46ec-926f-1efc23139ed2"
       },
       {
-        "__uuid__": "b40057d0-ab8b-45af-b6c3-fae10fd90b23"
+        "__uuid__": "cfbf284d-0ee0-4ba3-86b3-1e494e653c89"
       },
       {
-        "__uuid__": "b6a53bf7-cc7f-4029-808b-9b86d6474ae7"
+        "__uuid__": "c0a3ab2f-7926-423a-adf5-9a8c897a5df7"
       },
       {
-        "__uuid__": "75302c74-ab43-4792-8268-68a3e98a47d0"
+        "__uuid__": "ac70ca0f-3ece-477b-ac73-b83af2de0d56"
+      },
+      {
+        "__uuid__": "22926f14-2562-41ac-841b-d4e6b5798e1a"
+      },
+      {
+        "__uuid__": "e1cd8fe4-5403-4f09-bec1-1785d67a63fa"
+      },
+      {
+        "__uuid__": "211cb8e0-ca9f-4605-8182-413d685d328c"
+      },
+      {
+        "__uuid__": "75a3d45b-3f03-4852-92d0-fac59e7c9f43"
+      },
+      {
+        "__uuid__": "7718ad48-4a36-4412-8d7e-f4fe0e348428"
+      },
+      {
+        "__uuid__": "5357aeda-4956-4406-9e39-2b9a1abec821"
       }
     ],
     "picPrices": [
       0,
-      2,
-      3,
-      4
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90
     ],
     "picTitles": [
       "水果",
       "蔬菜",
-      "动漫",
-      "海洋"
+      "动物1",
+      "动物2",
+      "鱼类",
+      "植物",
+      "海洋",
+      "二次元一",
+      "二次元二",
+      "二次元三"
     ]
   },
   {
@@ -2797,7 +2827,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "e49cf173-3bfa-40cb-8a57-0d82e3d606c2"
+      "__uuid__": "05936752-51ce-46ec-926f-1efc23139ed2"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -2812,7 +2842,9 @@
     "_isTrimmedMode": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_atlas": null
+    "_atlas": {
+      "__uuid__": "aecf8251-9224-4027-9d53-f257a02ae7f0"
+    }
   },
   {
     "__type__": "cc.Node",

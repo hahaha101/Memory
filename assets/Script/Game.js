@@ -39,6 +39,8 @@ var Game = cc.Class({
         this.audioMng = this.audioMng.getComponent('AudioMng');
         this.inGameUI.init(this.betDuration);
 
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+
         this.player = null;
         this.createPlayer();
 
@@ -72,6 +74,14 @@ var Game = cc.Class({
         },0.1);
 
         this.audioMng.playMusic();
+    },
+    onDestroy () {
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+    },
+    onKeyUp: function (event) {
+        if(event.keyCode == cc.KEY.back){
+            cc.director.end();
+        }
     },
     setNodePosWithRandom: function(node){
         //生成随机位置
