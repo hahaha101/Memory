@@ -59,7 +59,7 @@ cc.Class({
         }
         Types.soundOn = cc.sys.localStorage.getItem('soundOn');
         if(Types.soundOn == null){
-            Types.soundOn = 0;
+            Types.soundOn = 1;
             cc.sys.localStorage.setItem('soundOn',Types.soundOn);
         }
         if(Types.soundOn == 0){
@@ -69,7 +69,7 @@ cc.Class({
         }
         Types.musicOn = cc.sys.localStorage.getItem('musicOn');
         if(Types.musicOn == null){
-            Types.musicOn = 0;
+            Types.musicOn = 1;
             cc.sys.localStorage.setItem('musicOn',Types.musicOn);
         }
         if(Types.musicOn == 0){
@@ -94,17 +94,19 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         this.audioMng = this.audioMng.getComponent('AudioMng');
-        this.audioMng.playMusic();
         this.assetMng = this.assetMng.getComponent('AssetMng');
         
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
 
         this.btnStart.interactable = true;
+
+        //cc.sys.localStorage.setItem("diamondCount",2000);
         //cc.sys.localStorage.removeItem('diamondCount');
         //cc.sys.localStorage.removeItem('picStatus');
         cc.sys.localStorage.removeItem('picSet');
         this.curIdx = 0;
         this.initFromLocalStorage();
+        this.audioMng.playMusic();
         this.refreshPicStatus();
         cc.director.preloadScene('game', function () {
             cc.log('Next scene preloaded');
@@ -154,13 +156,12 @@ cc.Class({
             this.btnStart.interactable = true;
         }else{
             this.btnShop.node.active = true;
+            this.btnStart.interactable = false;
             let price = this.assetMng.picPrices[this.curIdx];
             if(price > Types.diamondCount){
                 this.btnShop.interactable = false;
-                this.btnStart.interactable = false;
             }else{
                 this.btnShop.interactable = true;
-                this.btnStart.interactable = true;
             }
         }
     },
@@ -181,6 +182,7 @@ cc.Class({
         this.blockNode.active = false;
         //TODO-图片系列改为未锁定状态
         this.btnShop.node.active = false;
+        this.btnStart.interactable = true;
     },
 
     dialogBtn2: function(event, customEventData){

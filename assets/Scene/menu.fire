@@ -2004,10 +2004,16 @@
     },
     "_enabled": true,
     "propPhotos": [],
-    "fruitPhotos": [],
-    "vegetables": [],
-    "cartnoons": [],
-    "seaPhotos": [],
+    "fruit": [],
+    "vegetable": [],
+    "animal1": [],
+    "animal2": [],
+    "fish": [],
+    "cactus": [],
+    "sea": [],
+    "cartnoon": [],
+    "girl": [],
+    "girl2": [],
     "mainPics": [
       {
         "__uuid__": "05936752-51ce-46ec-926f-1efc23139ed2"
