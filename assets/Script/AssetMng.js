@@ -6,6 +6,7 @@ var AssetMng = cc.Class({
         fruitPhotos: [cc.SpriteFrame],
         vegetables: [cc.SpriteFrame],
         cartnoons: [cc.SpriteFrame],
+        seaPhotos: [cc.SpriteFrame],
         mainPics: [cc.SpriteFrame],
         picPrices: [cc.Integer],
         picTitles: [cc.String]

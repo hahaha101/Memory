@@ -134,6 +134,7 @@ var Game = cc.Class({
                 this.showFail();
             }
         }else{
+            this.audioMng.playDiamond();
             this.diamond++;
             this.inGameUI.labelDiamond.string = this.diamond;
         }
@@ -175,6 +176,7 @@ var Game = cc.Class({
         this.diamondPool.put(node);
     },
     createProp:function(propType){
+        this.audioMng.playProp();
         let prop = null;
         if(this.propPool.size() > 0){
             prop = this.propPool.get();
@@ -239,6 +241,7 @@ var Game = cc.Class({
 
         if(customEventData == this.player.isSame || this.curPropType == 1){  //正确，显示下一张图片
             //this.showCard();
+            this.audioMng.playWin();
             this.destroyRestDiamond();
             this.destroyRestSProp();
             this.player.oldCardFly();
@@ -257,6 +260,7 @@ var Game = cc.Class({
     },
 
     showFail: function(){
+        this.audioMng.playLose();
         //比较当前得分和最高分
         let isHighScore = false;
         let highScore = Number(cc.sys.localStorage.getItem('highScore0'));
@@ -274,6 +278,7 @@ var Game = cc.Class({
     },
 
     restart: function(){
+        this.audioMng.playButton();
         this.score = 0;
         this.diamond = 0;
         this.player.renderer.comboCount = 0;
@@ -287,6 +292,7 @@ var Game = cc.Class({
     },
 
     quitToMenu: function () {
+        this.audioMng.playButton();
         cc.director.loadScene('menu');
     }
 

@@ -8,12 +8,15 @@ cc.Class({
         assetMng: cc.Node,
         blockNode: cc.Node,
         btnShop: cc.Button,
+        btnStart: cc.Button,
         mainPic: cc.Sprite,
         resizeDialog: cc.Prefab,
         diamondLabel: cc.Label,
         goldLabel: cc.Label,
         picTitle: cc.Label,
         picPrice: cc.Label,
+        soundToggle: cc.Toggle,
+        musicToggle: cc.Toggle,
         curIdx: 0
     },
     createMask: function(){
@@ -54,6 +57,26 @@ cc.Class({
             Types.highScore0 = 0;
             cc.sys.localStorage.setItem('highScore0',Types.highScore0);
         }
+        Types.soundOn = cc.sys.localStorage.getItem('soundOn');
+        if(Types.soundOn == null){
+            Types.soundOn = 0;
+            cc.sys.localStorage.setItem('soundOn',Types.soundOn);
+        }
+        if(Types.soundOn == 0){
+            this.soundToggle.isChecked = false;
+        }else{
+            this.soundToggle.isChecked = true;
+        }
+        Types.musicOn = cc.sys.localStorage.getItem('musicOn');
+        if(Types.musicOn == null){
+            Types.musicOn = 0;
+            cc.sys.localStorage.setItem('musicOn',Types.musicOn);
+        }
+        if(Types.musicOn == 0){
+            this.musicToggle.isChecked = false;
+        }else{
+            this.musicToggle.isChecked = true;
+        }
 
         var picStatus = cc.sys.localStorage.getItem('picStatus');
         if(picStatus == null){
@@ -71,11 +94,15 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         this.audioMng = this.audioMng.getComponent('AudioMng');
-        //this.audioMng.playMusic();
+        this.audioMng.playMusic();
         this.assetMng = this.assetMng.getComponent('AssetMng');
         
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+
+        this.btnStart.interactable = true;
         //cc.sys.localStorage.removeItem('diamondCount');
         //cc.sys.localStorage.removeItem('picStatus');
+        cc.sys.localStorage.removeItem('picSet');
         this.curIdx = 0;
         this.initFromLocalStorage();
         this.refreshPicStatus();
@@ -83,15 +110,26 @@ cc.Class({
             cc.log('Next scene preloaded');
         });
     },
+    onDestroy () {
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+    },
+    onKeyUp: function (event) {
+        if(event.keyCode == cc.KEY.back){
+            cc.director.end();
+        }
+    },
 
     playGame: function (mode,customEventData) {
+        this.audioMng.pauseMusic();
+        this.audioMng.playButton();
         cc.sys.localStorage.setItem('picSet',Types.picSet);
         cc.director.loadScene('game');
     },
 
     showPic: function(mode,customEventData){
+        this.audioMng.playButton();
+
         let len = this.assetMng.mainPics.length-1;
-        
         //显示下一套图片
         if(customEventData == 1){
             if(this.curIdx < len){
@@ -113,13 +151,16 @@ cc.Class({
         this.picPrice.string = this.assetMng.picPrices[this.curIdx];
         if(Types.picStatus[this.curIdx] == 1){
             this.btnShop.node.active = false;
+            this.btnStart.interactable = true;
         }else{
             this.btnShop.node.active = true;
             let price = this.assetMng.picPrices[this.curIdx];
             if(price > Types.diamondCount){
                 this.btnShop.interactable = false;
+                this.btnStart.interactable = false;
             }else{
                 this.btnShop.interactable = true;
+                this.btnStart.interactable = true;
             }
         }
     },
@@ -158,7 +199,7 @@ cc.Class({
         this.blockNode.active = true;
     },
     buyPic: function(){
-
+        this.audioMng.playButton();
         //1.查看购买状态
         let status = Types.picStatus[this.curIdx];
         if(status == 1){
@@ -172,6 +213,24 @@ cc.Class({
             this.showConfirm();
         }
         
+    },
+    onSoundCheck: function(event,customEventData){
+        if(this.soundToggle.isChecked){
+            Types.soundOn = 1;
+        }else{
+            Types.soundOn = 0;
+        }
+        cc.sys.localStorage.setItem('soundOn',Types.soundOn);
+    },
+    onMusicCheck: function(event,customEventData){
+        if(this.musicToggle.isChecked){
+            Types.musicOn = 1;
+            this.audioMng.playMusic();
+        }else{
+            Types.musicOn = 0;
+            this.audioMng.pauseMusic();
+        }
+        cc.sys.localStorage.setItem('musicOn',Types.musicOn);
     },
     // called every frame
     update: function (dt) {

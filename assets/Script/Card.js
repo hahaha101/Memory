@@ -19,6 +19,8 @@ cc.Class({
             this.mainPic.spriteFrame = Game.instance.assetMng.vegetables[card];
         }else if(type == 2){
             this.mainPic.spriteFrame = Game.instance.assetMng.cartnoons[card];
+        }else if(type == 3){
+            this.mainPic.spriteFrame = Game.instance.assetMng.seaPhotos[card];
         }
     },
 

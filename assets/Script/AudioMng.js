@@ -1,3 +1,5 @@
+var Types = require('Types');
+
 cc.Class({
     extends: cc.Component,
 
@@ -11,18 +13,17 @@ cc.Class({
             default: null,
             url: cc.AudioClip
         },
+        diamondAudio: {
+            default: null,
+            url: cc.AudioClip
+        },
 
-        cardAudio: {
+        propAudio: {
             default: null,
             url: cc.AudioClip
         },
 
         buttonAudio: {
-            default: null,
-            url: cc.AudioClip
-        },
-
-        chipsAudio: {
             default: null,
             url: cc.AudioClip
         },
@@ -34,7 +35,9 @@ cc.Class({
     },
 
     playMusic: function() {
-        cc.audioEngine.playMusic( this.bgm, true );
+        if(Types.musicOn == 1){
+            cc.audioEngine.playMusic( this.bgm, true );
+        }
     },
 
     pauseMusic: function() {
@@ -50,22 +53,31 @@ cc.Class({
     },
 
     playWin: function() {
-        this._playSFX(this.winAudio);
+        if(Types.soundOn == 1){
+            this._playSFX(this.winAudio);
+        }
     },
 
     playLose: function() {
-        this._playSFX(this.loseAudio);
+        if(Types.soundOn == 1){
+            this._playSFX(this.loseAudio);
+        }
+    },
+    playDiamond: function() {
+        if(Types.soundOn == 1){
+            this._playSFX(this.diamondAudio);
+        }
     },
 
-    playCard: function() {
-        this._playSFX(this.cardAudio);
-    },
-
-    playChips: function() {
-        this._playSFX(this.chipsAudio);
+    playProp: function() {
+        if(Types.soundOn == 1){
+            this._playSFX(this.propAudio);
+        }
     },
 
     playButton: function() {
-        this._playSFX(this.buttonAudio);
+        if(Types.soundOn == 1){
+            this._playSFX(this.buttonAudio);
+        }
     }
 });
