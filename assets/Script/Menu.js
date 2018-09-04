@@ -103,7 +103,7 @@ cc.Class({
         //cc.sys.localStorage.setItem("diamondCount",2000);
         //cc.sys.localStorage.removeItem('diamondCount');
         //cc.sys.localStorage.removeItem('picStatus');
-        cc.sys.localStorage.removeItem('picSet');
+        //cc.sys.localStorage.removeItem('picSet');
         this.curIdx = 0;
         this.initFromLocalStorage();
         this.audioMng.playMusic();
