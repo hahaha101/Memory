@@ -120,6 +120,9 @@ cc.Class({
             cc.director.end();
         }
     },
+    onQuit: function(){
+        cc.director.end();
+    },
 
     playGame: function (mode,customEventData) {
         this.audioMng.pauseMusic();
