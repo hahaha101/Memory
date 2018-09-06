@@ -40,6 +40,7 @@ cc.Class({
     initFromLocalStorage: function(){
         Types.picSet = cc.sys.localStorage.getItem('picSet');
         if(Types.picSet == null){
+            Types.isFirst = 1;
             Types.picSet = this.curIdx;
             cc.sys.localStorage.setItem('picSet',Types.picSet);
         }else{

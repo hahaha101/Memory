@@ -5,5 +5,6 @@ module.exports = {
     diamondCount: 0,
     highScore0: 0,
     soundOn: 0,
-    musicOn: 0
+    musicOn: 0,
+    isFirst: 0
 };

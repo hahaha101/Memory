@@ -16,6 +16,7 @@ var Game = cc.Class({
         inGameUI: cc.Node,
         audioMng: cc.Node,
         assetMng: cc.Node,
+        tutorialPanel: cc.Node,
         betDuration: 0,
         score: 0,
         diamond: 0,
@@ -31,8 +32,8 @@ var Game = cc.Class({
         instance: null
     },
 
-    // use this for initialization
-    onLoad: function () {
+    startGame: function(){
+        this.tutorialPanel.active = false;
         Game.instance = this;
         this.inGameUI = this.inGameUI.getComponent('InGameUI');
         this.assetMng = this.assetMng.getComponent('AssetMng');
@@ -72,8 +73,16 @@ var Game = cc.Class({
         this.scheduleOnce(function(){
             this.showCardOnce();
         },0.1);
+    },
 
-        this.audioMng.playMusic();
+    // use this for initialization
+    onLoad: function () {
+        if(Types.isFirst == 0){
+            this.tutorialPanel.active = false;
+            this.startGame();
+        }else{
+            this.tutorialPanel.active = true;
+        }
     },
     onDestroy () {
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
