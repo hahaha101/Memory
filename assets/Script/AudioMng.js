@@ -6,31 +6,31 @@ cc.Class({
     properties: {
         winAudio: {
             default: null,
-            url: cc.AudioClip
+            type: cc.AudioClip
         },
 
         loseAudio: {
             default: null,
-            url: cc.AudioClip
+            type: cc.AudioClip
         },
         diamondAudio: {
             default: null,
-            url: cc.AudioClip
+            type: cc.AudioClip
         },
 
         propAudio: {
             default: null,
-            url: cc.AudioClip
+            type: cc.AudioClip
         },
 
         buttonAudio: {
             default: null,
-            url: cc.AudioClip
+            type: cc.AudioClip
         },
 
         bgm: {
             default: null,
-            url: cc.AudioClip
+            type: cc.AudioClip
         }
     },
 
