@@ -176,15 +176,15 @@ cc.Class({
         this.diamondLabel.string = Types.diamondCount;
         this.goldLabel.string = Types.highScore0;
         this.mainPic.spriteFrame = this.assetMng.mainPics[this.curIdx];
-        this.picTitle.string = this.assetMng.picTitles[this.curIdx];
-        this.picPrice.string = this.assetMng.picPrices[this.curIdx];
+        this.picTitle.string = PicConfigs.picConfigs[this.curIdx].title;
+        this.picPrice.string = PicConfigs.picConfigs[this.curIdx].price;
         if(Types.picStatus[this.curIdx] == 1){
             this.btnShop.node.active = false;
             this.btnStart.interactable = true;
         }else{
             this.btnShop.node.active = true;
             this.btnStart.interactable = false;
-            let price = this.assetMng.picPrices[this.curIdx];
+            let price = PicConfigs.picConfigs[this.curIdx].price;
             if(price > Types.diamondCount){
                 this.btnShop.interactable = false;
             }else{
@@ -198,7 +198,7 @@ cc.Class({
         var dialog = self.parent.parent;
         dialog.getComponent("dialog").close();
 
-        Types.diamondCount -= this.assetMng.picPrices[this.curIdx];
+        Types.diamondCount -= PicConfigs.picConfigs[this.curIdx].price;
         cc.sys.localStorage.setItem('diamondCount',Types.diamondCount);
         this.diamondLabel.string = Types.diamondCount;
 
@@ -236,7 +236,7 @@ cc.Class({
         }
 
         //2.比较当前有的钻石数量和需要花费的钻石数量
-        let price = this.assetMng.picPrices[this.curIdx];
+        let price = PicConfigs.picConfigs[this.curIdx].price;
         //3.钻石数量充足，确认是否购买
         if(price <= Types.diamondCount){
             this.showConfirm();
