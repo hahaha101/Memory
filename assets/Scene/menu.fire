@@ -2500,7 +2500,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button_free",
+    "_name": "button_start",
     "_objFlags": 0,
     "_parent": {
       "__id__": 58
@@ -2520,7 +2520,7 @@
       }
     ],
     "_prefab": null,
-    "_id": "ebDNw0EYlK4bNz93LRq3SC",
+    "_id": "0dR+UZQeBGhLOYoUjzzAaL",
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
@@ -2537,17 +2537,17 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 432,
-      "height": 142
+      "width": 267,
+      "height": 81
     },
     "_rotationX": 0,
     "_rotationY": 0,
-    "_scaleX": 0.8,
-    "_scaleY": 0.8,
+    "_scaleX": 1,
+    "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 289.99999999999994,
-      "y": -180
+      "x": 520.16,
+      "y": -184.5
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -2590,19 +2590,19 @@
       "__id__": 59
     },
     "_enabled": true,
-    "alignMode": 0,
+    "alignMode": 1,
     "_target": null,
-    "_alignFlags": 8,
-    "_left": 0.5878560719640179,
-    "_right": 0,
+    "_alignFlags": 36,
+    "_left": 0,
+    "_right": 0.01,
     "_top": 0,
-    "_bottom": 0,
+    "_bottom": 0.2,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
-    "_isAbsLeft": false,
-    "_isAbsRight": true,
+    "_isAbsLeft": true,
+    "_isAbsRight": false,
     "_isAbsTop": true,
-    "_isAbsBottom": true,
+    "_isAbsBottom": false,
     "_isAbsHorizontalCenter": true,
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
@@ -2639,7 +2639,7 @@
       }
     ],
     "_N$interactable": true,
-    "_N$enableAutoGrayEffect": true,
+    "_N$enableAutoGrayEffect": false,
     "_N$normalColor": {
       "__type__": "cc.Color",
       "r": 214,
@@ -2671,7 +2671,7 @@
     },
     "component": "Menu",
     "handler": "playGame",
-    "customEventData": "0"
+    "customEventData": ""
   },
   {
     "__type__": "cc.Node",
@@ -2706,8 +2706,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 276,
-      "height": 448
+      "width": 475,
+      "height": 639
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -2715,8 +2715,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 300,
-      "y": 100
+      "x": 260,
+      "y": 60
     },
     "_skewX": 0,
     "_skewY": 0,
