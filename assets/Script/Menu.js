@@ -1,4 +1,5 @@
 var Types = require('Types');
+var PicConfigs = require('PicConfig')
 
 cc.Class({
     extends: cc.Component,
@@ -92,19 +93,41 @@ cc.Class({
         }
     },
 
+    loadAltasOver: function(err,atlas,self){
+        if(err){
+            cc.log(err);
+            return;
+        }else{
+            for(let i = 1;i <= 10;++i){
+                var tempStr = i + '';
+                var frame = atlas.getSpriteFrame(tempStr);
+                PicConfigs.picConfigs[PicConfigs.loadIdx].frames.push(frame);
+            }
+            if(PicConfigs.loadIdx < PicConfigs.picConfigs.length-1){
+                PicConfigs.loadIdx++;
+                var tempItem = PicConfigs.picConfigs[PicConfigs.loadIdx];
+                cc.loader.loadRes(tempItem.name,cc.SpriteAtlas,PicConfigs.self.loadAltasOver);
+            }else{
+                PicConfigs.self.blockNode.active = false;
+            }
+            return;
+        }
+        return;
+    },
     // use this for initialization
     onLoad: function () {
+
+        this.blockNode.active = true;
+        PicConfigs.self = this;
+        var tempItem = PicConfigs.picConfigs[PicConfigs.loadIdx];
+        cc.loader.loadRes(tempItem.name,cc.SpriteAtlas,this.loadAltasOver);
+
         this.audioMng = this.audioMng.getComponent('AudioMng');
         this.assetMng = this.assetMng.getComponent('AssetMng');
         
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
 
         this.btnStart.interactable = true;
-
-        //cc.sys.localStorage.setItem("diamondCount",2000);
-        //cc.sys.localStorage.removeItem('diamondCount');
-        //cc.sys.localStorage.removeItem('picStatus');
-        //cc.sys.localStorage.removeItem('picSet');
         this.curIdx = 0;
         this.initFromLocalStorage();
         this.audioMng.playMusic();
