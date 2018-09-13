@@ -25,6 +25,8 @@ cc.Class({
         },
         failPanelLabelScore: cc.Label,
         failPanelLabelDiamond: cc.Label,
+        failPanelLabelHighScore: cc.Label,
+        failPanelLabelTotalDiamond: cc.Label,
         failPanelHighScore: cc.Sprite
     },
 
@@ -35,10 +37,12 @@ cc.Class({
         this.isBetCounting = false;
         this.failBtnPanel.active = false;
     },
-    showFailPanel: function(score,diamond,isHighScore){
+    showFailPanel: function(score,diamond,highScore,diamondTotal,isHighScore){
         this.failBtnPanel.active = true;
         this.failPanelLabelScore.string = score;
         this.failPanelLabelDiamond.string = diamond;
+        this.failPanelLabelHighScore.string = 'best ' + highScore;
+        this.failPanelLabelTotalDiamond.string = 'total ' + diamondTotal;
         this.failPanelHighScore.node.active = isHighScore;
         this.btnYes.active = false;
         this.btnNo.active = false;

@@ -244,7 +244,7 @@ var Game = cc.Class({
 
         if(this.curPropType == -1){
             random = Math.random();
-            if(random > 0.0){
+            if(random > 0.8){
                 this.createSmallProp();
             }
         }
@@ -285,6 +285,7 @@ var Game = cc.Class({
         let highScore = Number(cc.sys.localStorage.getItem('highScore0'));
         if(this.score > highScore){
             isHighScore = true;
+            highScore = this.score;
             cc.sys.localStorage.setItem('highScore0',this.score);
         }
         
@@ -293,7 +294,7 @@ var Game = cc.Class({
         diamondTotal += this.diamond;
         cc.sys.localStorage.setItem('diamondCount',diamondTotal);
         this.curPropType = -1;
-        this.player.showFail(this.score,this.diamond,isHighScore);
+        this.player.showFail(this.score,this.diamond,highScore,diamondTotal,isHighScore);
     },
 
     restart: function(){

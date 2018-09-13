@@ -100,8 +100,6 @@ cc.Class({
             cc.log(err);
             return;
         }else{
-            let pro = PicConfigs.loadIdx / PicConfigs.picConfigs.length;
-            cc.log(pro);
             PicConfigs.self.loadProgress.progress = PicConfigs.loadIdx / PicConfigs.picConfigs.length;
             for(let i = 1;i <= 10;++i){
                 var tempStr = i + '';
@@ -132,7 +130,7 @@ cc.Class({
 
         this.audioMng = this.audioMng.getComponent('AudioMng');
         this.assetMng = this.assetMng.getComponent('AssetMng');
-        
+
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
 
         this.btnStart.interactable = true;

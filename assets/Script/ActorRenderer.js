@@ -92,12 +92,12 @@ cc.Class({
         }
     },
 
-    showFail: function(score,diamond,isHighScore){
+    showFail: function(score,diamond,highScore,diamondTotal,isHighScore){
         this.resetCountdown();
         Game.instance.destroyRestSProp();
         Game.instance.destroyRestDiamond();
         Game.instance.destroyProp();
-        Game.instance.inGameUI.showFailPanel(score,diamond,isHighScore);
+        Game.instance.inGameUI.showFailPanel(score,diamond,highScore,diamondTotal,isHighScore);
         this.anchorCards.active = false;
         this.timerSpeed = 0;
     },
