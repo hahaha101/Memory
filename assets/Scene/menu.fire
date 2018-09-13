@@ -2006,73 +2006,7 @@
       "__id__": 48
     },
     "_enabled": true,
-    "propPhotos": [],
-    "fruit": [],
-    "vegetable": [],
-    "animal1": [],
-    "animal2": [],
-    "fish": [],
-    "cactus": [],
-    "sea": [],
-    "cartnoon": [],
-    "girl": [],
-    "girl2": [],
-    "mainPics": [
-      {
-        "__uuid__": "05936752-51ce-46ec-926f-1efc23139ed2"
-      },
-      {
-        "__uuid__": "cfbf284d-0ee0-4ba3-86b3-1e494e653c89"
-      },
-      {
-        "__uuid__": "c0a3ab2f-7926-423a-adf5-9a8c897a5df7"
-      },
-      {
-        "__uuid__": "ac70ca0f-3ece-477b-ac73-b83af2de0d56"
-      },
-      {
-        "__uuid__": "22926f14-2562-41ac-841b-d4e6b5798e1a"
-      },
-      {
-        "__uuid__": "e1cd8fe4-5403-4f09-bec1-1785d67a63fa"
-      },
-      {
-        "__uuid__": "211cb8e0-ca9f-4605-8182-413d685d328c"
-      },
-      {
-        "__uuid__": "75a3d45b-3f03-4852-92d0-fac59e7c9f43"
-      },
-      {
-        "__uuid__": "7718ad48-4a36-4412-8d7e-f4fe0e348428"
-      },
-      {
-        "__uuid__": "5357aeda-4956-4406-9e39-2b9a1abec821"
-      }
-    ],
-    "picPrices": [
-      0,
-      10,
-      20,
-      30,
-      40,
-      50,
-      60,
-      70,
-      80,
-      90
-    ],
-    "picTitles": [
-      "水果",
-      "蔬菜",
-      "动物1",
-      "动物2",
-      "鱼类",
-      "植物",
-      "海洋",
-      "二次元一",
-      "二次元二",
-      "二次元三"
-    ]
+    "propPhotos": []
   },
   {
     "__type__": "ae2d1K8VbpL5JyfbsncxToA",
@@ -2648,7 +2582,7 @@
       }
     ],
     "_N$interactable": true,
-    "_N$enableAutoGrayEffect": false,
+    "_N$enableAutoGrayEffect": true,
     "_N$normalColor": {
       "__type__": "cc.Color",
       "r": 214,

@@ -32,7 +32,7 @@ cc.Class({
     },
     arrayFromMask: function(nMask){
         var aFromMask = [];
-        let loopCount = this.assetMng.mainPics.length;
+        let loopCount = PicConfigs.picConfigs.length;
         for (var nShifted = nMask; loopCount > 0; nShifted >>>= 1){
             aFromMask.push(Boolean(nShifted & 1));
             --loopCount;
@@ -85,7 +85,7 @@ cc.Class({
         var picStatus = cc.sys.localStorage.getItem('picStatus');
         if(picStatus == null){
             Types.picStatus.push(1);
-            for(let i = 1;i < this.assetMng.mainPics.length;++i){
+            for(let i = 1;i < PicConfigs.picConfigs.length;++i){
                 Types.picStatus.push(0);
             }
             var mask = this.createMask();
@@ -116,6 +116,7 @@ cc.Class({
                 PicConfigs.self.blockNode.active = false;
                 PicConfigs.self.loadProgress.progress = 1;
                 PicConfigs.self.loadBg.active = false;
+                PicConfigs.self.refreshPicStatus();
             }
             return;
         }
@@ -138,7 +139,7 @@ cc.Class({
         this.curIdx = 0;
         this.initFromLocalStorage();
         this.audioMng.playMusic();
-        this.refreshPicStatus();
+        
         cc.director.preloadScene('game', function () {
             cc.log('Next scene preloaded');
         });
@@ -165,7 +166,7 @@ cc.Class({
     showPic: function(mode,customEventData){
         this.audioMng.playButton();
 
-        let len = this.assetMng.mainPics.length-1;
+        let len = PicConfigs.picConfigs.length-1;
         //显示下一套图片
         if(customEventData == 1){
             if(this.curIdx < len){
@@ -182,7 +183,7 @@ cc.Class({
     refreshPicStatus: function(){
         this.diamondLabel.string = Types.diamondCount;
         this.goldLabel.string = Types.highScore0;
-        this.mainPic.spriteFrame = this.assetMng.mainPics[this.curIdx];
+        this.mainPic.spriteFrame = PicConfigs.picConfigs[this.curIdx].frames[0];
         this.picTitle.string = PicConfigs.picConfigs[this.curIdx].title;
         this.picPrice.string = PicConfigs.picConfigs[this.curIdx].price;
         if(Types.picStatus[this.curIdx] == 1){
