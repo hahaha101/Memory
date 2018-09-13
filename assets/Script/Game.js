@@ -244,7 +244,7 @@ var Game = cc.Class({
 
         if(this.curPropType == -1){
             random = Math.random();
-            if(random > 0.8){
+            if(random > 0.85){
                 this.createSmallProp();
             }
         }
