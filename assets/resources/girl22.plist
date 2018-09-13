@@ -164,13 +164,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>fruit.png</string>
+            <string>girl22.png</string>
             <key>size</key>
             <string>{1620,846}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:de507c1c9bfd6c515d3654666028d435:e1d4d17d99c148b03ba74bc612ff641e:61ebfeb4a02f55db7ab45fc9c5d0ca36$</string>
+            <string>$TexturePacker:SmartUpdate:24daa8a7852d3ba0dc7e756d3fbe38c3:1c8edbc228b37c082d83e26013875473:e1a679a4f17df290d6f3af5e300c8420$</string>
             <key>textureFileName</key>
-            <string>fruit.png</string>
+            <string>girl22.png</string>
         </dict>
     </dict>
 </plist>

@@ -41,11 +41,11 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{324,423}</string>
+                <string>{342,423}</string>
                 <key>spriteSourceSize</key>
-                <string>{324,423}</string>
+                <string>{342,423}</string>
                 <key>textureRect</key>
-                <string>{{324,0},{324,423}}</string>
+                <string>{{324,0},{342,423}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -56,11 +56,11 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{324,423}</string>
+                <string>{321,423}</string>
                 <key>spriteSourceSize</key>
-                <string>{324,423}</string>
+                <string>{321,423}</string>
                 <key>textureRect</key>
-                <string>{{648,0},{324,423}}</string>
+                <string>{{666,0},{321,423}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -75,7 +75,7 @@
                 <key>spriteSourceSize</key>
                 <string>{324,423}</string>
                 <key>textureRect</key>
-                <string>{{972,0},{324,423}}</string>
+                <string>{{987,0},{324,423}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -90,7 +90,7 @@
                 <key>spriteSourceSize</key>
                 <string>{324,423}</string>
                 <key>textureRect</key>
-                <string>{{1296,0},{324,423}}</string>
+                <string>{{1311,0},{324,423}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -164,13 +164,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>fruit.png</string>
+            <string>girl3.png</string>
             <key>size</key>
-            <string>{1620,846}</string>
+            <string>{1635,846}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:de507c1c9bfd6c515d3654666028d435:e1d4d17d99c148b03ba74bc612ff641e:61ebfeb4a02f55db7ab45fc9c5d0ca36$</string>
+            <string>$TexturePacker:SmartUpdate:d14a5e80b5503a08eeaf62ff6fcca935:4dbcc60f0723406cbea7305485cd7ebe:5a331e38c0140dbe921cc9b72d55cce7$</string>
             <key>textureFileName</key>
-            <string>fruit.png</string>
+            <string>girl3.png</string>
         </dict>
     </dict>
 </plist>
