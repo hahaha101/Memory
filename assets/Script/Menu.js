@@ -18,6 +18,8 @@ cc.Class({
         picPrice: cc.Label,
         soundToggle: cc.Toggle,
         musicToggle: cc.Toggle,
+        loadBg: cc.Node,
+        loadProgress: cc.ProgressBar,
         curIdx: 0
     },
     createMask: function(){
@@ -98,6 +100,9 @@ cc.Class({
             cc.log(err);
             return;
         }else{
+            let pro = PicConfigs.loadIdx / PicConfigs.picConfigs.length;
+            cc.log(pro);
+            PicConfigs.self.loadProgress.progress = PicConfigs.loadIdx / PicConfigs.picConfigs.length;
             for(let i = 1;i <= 10;++i){
                 var tempStr = i + '';
                 var frame = atlas.getSpriteFrame(tempStr);
@@ -109,6 +114,8 @@ cc.Class({
                 cc.loader.loadRes(tempItem.name,cc.SpriteAtlas,PicConfigs.self.loadAltasOver);
             }else{
                 PicConfigs.self.blockNode.active = false;
+                PicConfigs.self.loadProgress.progress = 1;
+                PicConfigs.self.loadBg.active = false;
             }
             return;
         }
