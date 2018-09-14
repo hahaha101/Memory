@@ -3451,7 +3451,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 80,
+      "width": 0,
       "height": 40
     },
     "_rotationX": 0,
@@ -3486,7 +3486,7 @@
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
-    "_N$string": "水果",
+    "_N$string": "",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
@@ -3503,7 +3503,7 @@
     "alignMode": 0,
     "_target": null,
     "_alignFlags": 9,
-    "_left": 0.4,
+    "_left": 0.4793650793650794,
     "_right": 0,
     "_top": 15,
     "_bottom": 0,
