@@ -226,10 +226,10 @@ cc.Class({
     },
 
     showConfirm: function(){
-        var dialog = cc.instantiate(this.resizeDialog).getComponent("dialog").init("","确认解锁当前图片吗",this.blockNode);
+        var dialog = cc.instantiate(this.resizeDialog).getComponent("dialog").init("","unlock the picture?",this.blockNode);
         var btn1Handler = CREATE_EVENT_HANDLER(this.node, "Menu", "dialogBtn1", "1");
         var btn2Handler = CREATE_EVENT_HANDLER(this.node, "Menu", "dialogBtn2", "2");
-        dialog.addButton("确认", btn1Handler).addButton("取消", btn2Handler);
+        dialog.addButton("yes", btn1Handler).addButton("no", btn2Handler);
         cc.find("Canvas").addChild(dialog.node);
         this.blockNode.active = true;
     },
