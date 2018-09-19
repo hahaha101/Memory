@@ -311,8 +311,24 @@ var Game = cc.Class({
         this.showCardOnce();
     },
 
+    quitToMenuCallBack: function(){
+        if (typeof FBInstant === 'undefined') return;
+        FBInstant.canCreateShortcutAsync()
+        .then(function(canCreateShortcut) {
+          if (canCreateShortcut) {
+            FBInstant.createShortcutAsync()
+              .then(function() {
+                // Shortcut created
+              })
+              .catch(function() {
+                // Shortcut not created
+              });
+          }
+        });
+    },
     quitToMenu: function () {
         this.audioMng.playButton();
+        var callback = cc.callFunc(this.quitToMenuCallBack, this);
         cc.director.loadScene('menu');
     },
     onShareGame: function(){
