@@ -123,10 +123,11 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
 
-        this.blockNode.active = true;
-        PicConfigs.self = this;
-        var tempItem = PicConfigs.picConfigs[PicConfigs.loadIdx];
-        cc.loader.loadRes(tempItem.name,cc.SpriteAtlas,this.loadAltasOver);
+        //this.loadBg.active = true;
+        //this.blockNode.active = true;
+        //PicConfigs.self = this;
+        //var tempItem = PicConfigs.picConfigs[PicConfigs.loadIdx];
+        //cc.loader.loadRes(tempItem.name,cc.SpriteAtlas,this.loadAltasOver);
 
         this.audioMng = this.audioMng.getComponent('AudioMng');
         this.assetMng = this.assetMng.getComponent('AssetMng');
@@ -137,6 +138,32 @@ cc.Class({
         this.curIdx = 0;
         this.initFromLocalStorage();
         this.audioMng.playMusic();
+
+        for(let i = 0;i < 10;++i){
+            if(i == 0){
+                PicConfigs.picConfigs[i].frames = this.assetMng.fruit;
+            }else if(i == 1){
+                PicConfigs.picConfigs[i].frames = this.assetMng.animal1;
+            }else if(i == 2){
+                PicConfigs.picConfigs[i].frames = this.assetMng.animal2;
+            }else if(i == 3){
+                PicConfigs.picConfigs[i].frames = this.assetMng.cartoon;
+            }else if(i == 4){
+                PicConfigs.picConfigs[i].frames = this.assetMng.girl;
+            }else if(i == 5){
+                PicConfigs.picConfigs[i].frames = this.assetMng.girl3;
+            }else if(i == 6){
+                PicConfigs.picConfigs[i].frames = this.assetMng.girl5;
+            }else if(i == 7){
+                PicConfigs.picConfigs[i].frames = this.assetMng.girl6;
+            }else if(i == 8){
+                PicConfigs.picConfigs[i].frames = this.assetMng.girl7;
+            }else if(i == 9){
+                PicConfigs.picConfigs[i].frames = this.assetMng.girl8;
+            }
+            
+        }
+        this.refreshPicStatus();
         
         cc.director.preloadScene('game', function () {
             cc.log('Next scene preloaded');
