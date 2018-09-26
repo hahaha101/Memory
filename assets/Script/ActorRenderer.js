@@ -110,6 +110,7 @@ cc.Class({
     },
 
     oldCardFly: function(){
+        this.isCounting = false;
         if(this.isCombo){
             this.comboCount++;
             var comboNode = Game.instance.inGameUI.comboPanel;

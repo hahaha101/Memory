@@ -123,6 +123,7 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
 
+        this.loadBg.active = true;
         this.blockNode.active = true;
         PicConfigs.self = this;
         var tempItem = PicConfigs.picConfigs[PicConfigs.loadIdx];
