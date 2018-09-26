@@ -1,5 +1,4 @@
 var Types = require('Types');
-var PicConfigs = require('PicConfig')
 
 cc.Class({
     extends: cc.Component,
@@ -32,7 +31,7 @@ cc.Class({
     },
     arrayFromMask: function(nMask){
         var aFromMask = [];
-        let loopCount = PicConfigs.picConfigs.length;
+        let loopCount = this.assetMng.mainPic.length;
         for (var nShifted = nMask; loopCount > 0; nShifted >>>= 1){
             aFromMask.push(Boolean(nShifted & 1));
             --loopCount;
@@ -85,7 +84,7 @@ cc.Class({
         var picStatus = cc.sys.localStorage.getItem('picStatus');
         if(picStatus == null){
             Types.picStatus.push(1);
-            for(let i = 1;i < PicConfigs.picConfigs.length;++i){
+            for(let i = 1;i < this.assetMng.mainPic.length;++i){
                 Types.picStatus.push(0);
             }
             var mask = this.createMask();
@@ -95,39 +94,8 @@ cc.Class({
         }
     },
 
-    loadAltasOver: function(err,atlas,self){
-        if(err){
-            cc.log(err);
-            return;
-        }else{
-            PicConfigs.self.loadProgress.progress = PicConfigs.loadIdx / PicConfigs.picConfigs.length;
-            for(let i = 1;i <= 10;++i){
-                var tempStr = i + '';
-                var frame = atlas.getSpriteFrame(tempStr);
-                PicConfigs.picConfigs[PicConfigs.loadIdx].frames.push(frame);
-            }
-            if(PicConfigs.loadIdx < PicConfigs.picConfigs.length-1){
-                PicConfigs.loadIdx++;
-                var tempItem = PicConfigs.picConfigs[PicConfigs.loadIdx];
-                cc.loader.loadRes(tempItem.name,cc.SpriteAtlas,PicConfigs.self.loadAltasOver);
-            }else{
-                PicConfigs.self.blockNode.active = false;
-                PicConfigs.self.loadProgress.progress = 1;
-                PicConfigs.self.loadBg.active = false;
-                PicConfigs.self.refreshPicStatus();
-            }
-            return;
-        }
-        return;
-    },
     // use this for initialization
     onLoad: function () {
-
-        //this.loadBg.active = true;
-        //this.blockNode.active = true;
-        //PicConfigs.self = this;
-        //var tempItem = PicConfigs.picConfigs[PicConfigs.loadIdx];
-        //cc.loader.loadRes(tempItem.name,cc.SpriteAtlas,this.loadAltasOver);
 
         this.audioMng = this.audioMng.getComponent('AudioMng');
         this.assetMng = this.assetMng.getComponent('AssetMng');
@@ -139,30 +107,6 @@ cc.Class({
         this.initFromLocalStorage();
         this.audioMng.playMusic();
 
-        for(let i = 0;i < 10;++i){
-            if(i == 0){
-                PicConfigs.picConfigs[i].frames = this.assetMng.fruit;
-            }else if(i == 1){
-                PicConfigs.picConfigs[i].frames = this.assetMng.animal1;
-            }else if(i == 2){
-                PicConfigs.picConfigs[i].frames = this.assetMng.animal2;
-            }else if(i == 3){
-                PicConfigs.picConfigs[i].frames = this.assetMng.cartoon;
-            }else if(i == 4){
-                PicConfigs.picConfigs[i].frames = this.assetMng.girl;
-            }else if(i == 5){
-                PicConfigs.picConfigs[i].frames = this.assetMng.girl3;
-            }else if(i == 6){
-                PicConfigs.picConfigs[i].frames = this.assetMng.girl5;
-            }else if(i == 7){
-                PicConfigs.picConfigs[i].frames = this.assetMng.girl6;
-            }else if(i == 8){
-                PicConfigs.picConfigs[i].frames = this.assetMng.girl7;
-            }else if(i == 9){
-                PicConfigs.picConfigs[i].frames = this.assetMng.girl8;
-            }
-            
-        }
         this.refreshPicStatus();
         
         cc.director.preloadScene('game', function () {
@@ -195,7 +139,7 @@ cc.Class({
     showPic: function(mode,customEventData){
         this.audioMng.playButton();
 
-        let len = PicConfigs.picConfigs.length-1;
+        let len = this.assetMng.mainPic.length-1;
         //显示下一套图片
         if(customEventData == 1){
             if(this.curIdx < len){
@@ -212,16 +156,16 @@ cc.Class({
     refreshPicStatus: function(){
         this.diamondLabel.string = Types.diamondCount;
         this.goldLabel.string = Types.highScore0;
-        this.mainPic.spriteFrame = PicConfigs.picConfigs[this.curIdx].frames[0];
-        this.picTitle.string = PicConfigs.picConfigs[this.curIdx].title;
-        this.picPrice.string = PicConfigs.picConfigs[this.curIdx].price;
+        this.mainPic.spriteFrame = this.assetMng.mainPic[this.curIdx];
+        this.picTitle.string = this.assetMng.title[this.curIdx]+"";
+        this.picPrice.string = this.assetMng.price[this.curIdx]+"";
         if(Types.picStatus[this.curIdx] == 1){
             this.btnShop.node.active = false;
             this.btnStart.interactable = true;
         }else{
             this.btnShop.node.active = true;
             this.btnStart.interactable = false;
-            let price = PicConfigs.picConfigs[this.curIdx].price;
+            let price = this.assetMng.price[this.curIdx];
             if(price > Types.diamondCount){
                 this.btnShop.interactable = false;
             }else{
@@ -235,7 +179,7 @@ cc.Class({
         var dialog = self.parent.parent;
         dialog.getComponent("dialog").close();
 
-        Types.diamondCount -= PicConfigs.picConfigs[this.curIdx].price;
+        Types.diamondCount -= this.assetMng.price[this.curIdx];
         cc.sys.localStorage.setItem('diamondCount',Types.diamondCount);
         this.diamondLabel.string = Types.diamondCount;
 
@@ -273,7 +217,7 @@ cc.Class({
         }
 
         //2.比较当前有的钻石数量和需要花费的钻石数量
-        let price = PicConfigs.picConfigs[this.curIdx].price;
+        let price = this.assetMng.price[this.curIdx];
         //3.钻石数量充足，确认是否购买
         if(price <= Types.diamondCount){
             this.showConfirm();

@@ -14,7 +14,17 @@ cc.Class({
 
     // use this for initialization
     init: function (type,card) {
-        this.mainPic.spriteFrame = PicConfig.picConfigs[type].frames[card];
+        if(type == 0){
+            this.mainPic.spriteFrame = Game.instance.assetMng.fruit[card];
+        }else if(type == 1){
+            this.mainPic.spriteFrame = Game.instance.assetMng.animal1[card];
+        }else if(type == 2){
+            this.mainPic.spriteFrame = Game.instance.assetMng.animal2[card];
+        }else if(type == 3){
+            this.mainPic.spriteFrame = Game.instance.assetMng.cartoon[card];
+        }else if(type == 4){
+            this.mainPic.spriteFrame = Game.instance.assetMng.girl[card];
+        }
     },
 
     reveal: function (isFaceUp) {
