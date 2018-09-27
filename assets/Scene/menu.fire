@@ -187,8 +187,8 @@
     "_spriteFrame": {
       "__uuid__": "54acaca6-e355-48c6-8bcf-4db0e6b9eabe"
     },
-    "_type": 0,
-    "_sizeMode": 1,
+    "_type": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",

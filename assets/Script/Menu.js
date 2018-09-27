@@ -40,8 +40,9 @@ cc.Class({
     },
 
     initFromLocalStorage: function(){
+        console.log("initFromLocalStorage ###################################");
         Types.picSet = cc.sys.localStorage.getItem('picSet');
-        if(Types.picSet == null){
+        if(Types.picSet == null || Types.picSet == ""){
             Types.isFirst = 1;
             Types.picSet = this.curIdx;
             cc.sys.localStorage.setItem('picSet',Types.picSet);
@@ -50,18 +51,18 @@ cc.Class({
         }
         
         Types.diamondCount = cc.sys.localStorage.getItem('diamondCount');
-        if(Types.diamondCount == null){
+        if(Types.diamondCount == null || Types.diamondCount == ""){
             Types.diamondCount = 0;
             cc.sys.localStorage.setItem('diamondCount',Types.diamondCount);
         }
 
         Types.highScore0 = cc.sys.localStorage.getItem('highScore0');
-        if(Types.highScore0 == null){
+        if(Types.highScore0 == null || Types.highScore0 == ""){
             Types.highScore0 = 0;
             cc.sys.localStorage.setItem('highScore0',Types.highScore0);
         }
         Types.soundOn = cc.sys.localStorage.getItem('soundOn');
-        if(Types.soundOn == null){
+        if(Types.soundOn == null || Types.soundOn == ""){
             Types.soundOn = 1;
             cc.sys.localStorage.setItem('soundOn',Types.soundOn);
         }
@@ -71,7 +72,7 @@ cc.Class({
             this.soundToggle.isChecked = true;
         }
         Types.musicOn = cc.sys.localStorage.getItem('musicOn');
-        if(Types.musicOn == null){
+        if(Types.musicOn == null || Types.musicOn == ""){
             Types.musicOn = 1;
             cc.sys.localStorage.setItem('musicOn',Types.musicOn);
         }
@@ -82,7 +83,7 @@ cc.Class({
         }
 
         var picStatus = cc.sys.localStorage.getItem('picStatus');
-        if(picStatus == null){
+        if(picStatus == null || picStatus == ""){
             Types.picStatus.push(1);
             for(let i = 1;i < this.assetMng.mainPic.length;++i){
                 Types.picStatus.push(0);
@@ -107,7 +108,7 @@ cc.Class({
         this.initFromLocalStorage();
         this.audioMng.playMusic();
 
-        this.refreshPicStatus();
+        //this.refreshPicStatus();
         
         cc.director.preloadScene('game', function () {
             cc.log('Next scene preloaded');
@@ -150,6 +151,7 @@ cc.Class({
                 this.curIdx--;
             }
         }
+        
         Types.picSet = this.curIdx;
         this.refreshPicStatus();
     },
